@@ -1,0 +1,186 @@
+{
+	"info": {
+		"_postman_id": "164f554f-1a2e-4e70-b57a-4c102b530787",
+		"name": "PractiseApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getallemployeesapi",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ee959572-1611-4257-a8c5-760526b50948",
+						"exec": [
+							"var response = JSON.parse(responseBody);\r",
+							"tests[\"employee name\"] = response.data[1].employee_name == \"Garrett Winters\";\r",
+							"\r",
+							"postman.setNextRequest(\"putrequest\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "8a51aa53-2995-43e7-9429-6c9eca63bdb0",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": "{{url}}/employees"
+			},
+			"response": []
+		},
+		{
+			"name": "Putrequest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa0939de-9c2e-41d4-be94-203785272f76",
+						"exec": [
+							"var response = JSON.parse(responseBody);\r",
+							"tests[\"name\"] = response.data.name == \"kohli\";   "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "604f2aa4-12f6-4566-91fa-dd359f93736f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"kohli\", \"salary\": \"123\",\"age\": \"29\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/update/8490"
+			},
+			"response": []
+		},
+		{
+			"name": "postemployee",
+			"_postman_id": "a241e0ba-e173-40ac-86b8-5e3cf53a41c9",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"test\",\"salary\":\"123\",\"age\":\"25\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/create"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete request",
+			"_postman_id": "e3428f19-2b40-46f4-8b56-c3f2a81b23c3",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "{{url}}/delete/3"
+			},
+			"response": []
+		},
+		{
+			"name": "validating for headers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "68db3071-4fe2-40b9-ae61-1b26d199e850",
+						"exec": [
+							"\r",
+							"\r",
+							"var response =JSON.parse(responseBody);\r",
+							"tests[\"check response status in exact position\"] == response.status==\"success\"\r",
+							"\r",
+							"\r",
+							"pm.test(\"check cotent-type header\", function()\r",
+							"{\r",
+							"pm.response.to.be.header(\"Content-Type\", \"application/json\");\r",
+							"});\r",
+							"pm.test(\"check server\", function()\r",
+							"{\r",
+							"pm.response.to.be.header(\"Server\", \"Apache\");\r",
+							"});\r",
+							"\r",
+							"postman.setNextRequest(\"null\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "d261744c-9b0e-401a-bb7b-f9995bb6099b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\t{\"name\":\"test\",\"salary\":\"123\",\"age\":\"29\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/create"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "266d42f3-b749-4d2b-9574-804a72efdc0f",
+				"type": "text/javascript",
+				"exec": [
+					"postman.setGlobalVariable(\"url\",\"https://dummy.restapiexample.com/api/v1\")",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "9ba85135-eb89-4f07-b82e-93b210058350",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
